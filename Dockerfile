@@ -1,12 +1,9 @@
-# 1. Küçük boyutlu bir .NET runtime image'ı kullanıyoruz
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-
-# 2. Uygulama dosyalarını klasöre kopyalıyoruz
 WORKDIR /app
 COPY . .
 
-# 3. Uygulamayı dış dünyaya açmak için port tanımlıyoruz
-EXPOSE 80
+# Railway 8080 portunu dış dünyaya açıyor, biz de uygulamayı o porttan çalıştırmalıyız
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
 
-# 4. Uygulamayı başlatıyoruz
 ENTRYPOINT ["dotnet", "tarifkapida.dll"]
