@@ -1,0 +1,9 @@
+# .NET 8 ASP.NET Core runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+
+# Tüm publish dosyalarını kopyala
+COPY . .
+
+# Uygulamayı başlat
+ENTRYPOINT ["dotnet", "tarifkapida.dll"]
