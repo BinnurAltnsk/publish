@@ -1,11 +1,12 @@
-# .NET 8 çalışma zamanı ortamını kullan
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# 1. Küçük boyutlu bir .NET runtime image'ı kullanıyoruz
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-# Uygulama çalışma dizini
+# 2. Uygulama dosyalarını klasöre kopyalıyoruz
 WORKDIR /app
-
-# Mevcut klasördeki her şeyi konteynere kopyala
 COPY . .
 
-# Uygulamayı başlat (dll adı küçük harfli: tarifkapida.dll)
+# 3. Uygulamayı dış dünyaya açmak için port tanımlıyoruz
+EXPOSE 80
+
+# 4. Uygulamayı başlatıyoruz
 ENTRYPOINT ["dotnet", "tarifkapida.dll"]
